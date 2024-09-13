@@ -3,11 +3,13 @@ import { Text, View, StyleSheet, Button } from "react-native";
 import ListaProdutos from "./Componentes/Adptadores/ListaProdutos";
 import Style from "./Styles/Default";
 import axios from "axios";
+import { useRouter } from "expo-router";
 
 
 
 export default function Index() {
- let [contador, setContador]=useState(0);
+  const router = useRouter();  
+
  let[produtos,setProdutos]=useState([]);
 
  useEffect(()=>{
@@ -28,13 +30,13 @@ function carregarProdutos(){
       >
       <ListaProdutos produtos={produtos}></ListaProdutos>
 
-      <Button title={`Clicado ${contador}`} onPress={clicarBotao}></Button>
+      <Button title='Cadastrar' onPress={()=>{telaCadastro()}}></Button>
 
 
     </View>
   );
-  function clicarBotao(){
-    setContador(contador+1);
+  function telaCadastro(){
+    
   }
   
 }
