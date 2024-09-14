@@ -3,7 +3,8 @@ import { Text, View, StyleSheet, Button } from "react-native";
 import ListaProdutos from "./Componentes/Adptadores/ListaProdutos";
 import Style from "./Styles/Default";
 import axios from "axios";
-import { useRouter } from "expo-router";
+import { useRouter, useFocusEffect } from "expo-router";
+
 
 
 
@@ -15,6 +16,10 @@ export default function Index() {
  useEffect(()=>{
   carregarProdutos();
 },[]);
+
+  useFocusEffect(() => {
+    carregarProdutos();
+  })
 
 function carregarProdutos(){
   axios.get('https://api-docker-2t8m.onrender.com/api/produtos')
@@ -28,7 +33,7 @@ function carregarProdutos(){
     <View
       style={Style.container}
       >
-      <ListaProdutos produtos={produtos}></ListaProdutos>
+      <ListaProdutos produtos={produtos} aoAtualizar={carregarProdutos}></ListaProdutos>
 
       <Button title='Cadastrar' onPress={()=>{telaCadastro()}}></Button>
 
@@ -36,7 +41,7 @@ function carregarProdutos(){
     </View>
   );
   function telaCadastro(){
-    
+    router.push('./Telas/cadastro')
   }
   
 }
